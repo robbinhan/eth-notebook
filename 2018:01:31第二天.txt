@@ -1,0 +1,32 @@
+1.rpc接口对某些namespace默认是不开放的，例如：personal。rpc方法调用是在rpc包的server.go的311行
+
+ethclient/ethclient.go是客户端代码
+
+rpc实际调用的方法在internal/ethapi/api.go
+
+internal/ethapi/api.go中带Private关键字对象的方法默认是不能同过rpc对外调用的，需要启动时加--rpcapi参数指定; 只有带Public的对象默认对外调用。
+
+http://www.qingpingshan.com/rjbc/ios/370683.html
+
+
+rpc有4个入口
+a) InProc 
+b) IPC
+c) HTTP
+d) ws
+
+IPC和InProc是所有模块都可以调用，无权限限制
+HTTP和ws是通过API配置来开放，有以下两处配置点，必须同时满足：
+1）node/defaults.go文件的DefaultConfig对象的HTTPModules和WSModules，或者cmd/geth/config.go文件的defaultNodeConfig函数
+2）internal/ethapi/backend.go文件的GetAPIs函数中的[]rpc.API数组返回中每个namespace的Public属性，其他模块需要开放接口也需要满足[]rpc.API数组的结构定义
+
+
+
+2.p2p节点通信
+https://github.com/ethereum/wiki/wiki/Node-discovery-protocol
+http://www.8btc.com/etc-p2p
+
+
+
+3.以太坊节点启动
+https://bitshuo.com/topic/5975fbb14a7a061b785db8d5

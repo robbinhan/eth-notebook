@@ -1,0 +1,5 @@
+https://github.com/ZtesoftCS/go-ethereum-code-analysis
+
+
+1.当前节点发起交易，交易数据是怎么到另一节点的？
+2.控制A节点为fullnode，B节点为非挖矿节点
