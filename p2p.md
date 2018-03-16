@@ -4,7 +4,7 @@
 
 节点启动后默认最多查找10个节点
 
- 
+
 每个节点会随机生成一个唯一的NodeID
 每个节点只有一个p2p server
 会从db中读取上次记录的活跃的节点
@@ -22,6 +22,12 @@ datadirTrustedNodes : trusted-nodes.json 信任
 datadirNodeDatabase : nodes
 
 
+
+
+
+1.从node/node.go 的Start 方法中启动p2p 服务，将node 的serverConfig 和serviceFuncs 初始化到p2p 对象，serviceFuncs 是调用node.go 的Register 方法注册进来的，包括一些eth、shh、dashboard
+
+2.逐个启动子服务
 
 
 
@@ -177,6 +183,12 @@ func SetP2PConfig(ctx *cli.Context, cfg *p2p.Config) {
 [js的实现](https://github.com/ethereumjs/ethereumjs-devp2p)
 
 [以太坊私網建立](https://medium.com/taipei-ethereum-meetup/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E7%B6%B2%E5%BB%BA%E7%AB%8B-%E4%B8%80-43f8677fc9f8)
+
+[以太坊源代码分析\] VI. 基于p2p的底层通信\(上篇\)](http://blog.csdn.net/DDFFR/article/details/78773930)
+
+
+
+
 
 
 ## RLP(序列化库)
